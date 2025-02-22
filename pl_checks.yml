@@ -2,7 +2,7 @@ name: Pull Requests Checks
 
 on:
   pull_request:
-    brunches: [ main ]
+    brаnches: [ main ]
 
 permissions:
   contents: read
