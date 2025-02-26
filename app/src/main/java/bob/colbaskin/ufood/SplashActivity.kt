@@ -13,10 +13,17 @@ import androidx.compose.animation.core.FastOutSlowInEasing
 import androidx.compose.animation.core.LinearEasing
 import androidx.compose.animation.core.LinearOutSlowInEasing
 import androidx.compose.animation.core.RepeatMode
+import androidx.compose.animation.core.Spring
+import androidx.compose.animation.core.VectorConverter
 import androidx.compose.animation.core.animateDp
 import androidx.compose.animation.core.animateDpAsState
+import androidx.compose.animation.core.animateFloat
+import androidx.compose.animation.core.animateOffset
 import androidx.compose.animation.core.animateOffsetAsState
+import androidx.compose.animation.core.animateValue
 import androidx.compose.animation.core.infiniteRepeatable
+import androidx.compose.animation.core.rememberInfiniteTransition
+import androidx.compose.animation.core.spring
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.core.updateTransition
 import androidx.compose.foundation.Image
@@ -95,28 +102,62 @@ private fun SplashScreen() {
     }
 
     var isAnimated by remember { mutableStateOf(false) }
-    val transition = updateTransition(targetState = isAnimated)
+    val burgerTransition = updateTransition(targetState = isAnimated)
     val burgerImage = ImageBitmap.imageResource(R.drawable.splash_main_logo)
     val imageHalfWidth = with(density) {
         (burgerImage.width / 2).toDp()
     }
-    val burgerXOffset by transition.animateDp(
-        transitionSpec = { tween(durationMillis = 750, easing = FastOutSlowInEasing) }
+    val burgerXOffset by burgerTransition.animateDp(
+        transitionSpec = {
+            spring(
+                dampingRatio = Spring.DampingRatioMediumBouncy,
+                stiffness = Spring.StiffnessVeryLow
+            )
+        }
     ) { state ->
         if (state) center - imageHalfWidth else -endScreen
     }
     val burgerSize = remember { Animatable(1f) }
 
-    val avocadoOffsetX = remember { Animatable(0f) }
-    val avocadoOffsetY = remember { Animatable(0f) }
-
-    val carrotOffsetX = remember { Animatable(0f) }
-    val carrotOffsetY = remember { Animatable(0f) }
-
-    val blurredCarrotOffsetX = remember { Animatable(0f) }
-    val blurredCarrotOffsetY = remember { Animatable(0f) }
-
-    val animationRoutine = rememberCoroutineScope()
+    val infiniteTransition = rememberInfiniteTransition()
+    val avocadoOffset: Offset by infiniteTransition.animateValue(
+        initialValue = Offset(0f, 0f),
+        targetValue = Offset((5..9).random().toFloat(), (3..7).random().toFloat()),
+        typeConverter = Offset.VectorConverter,
+        animationSpec = infiniteRepeatable(
+            animation = tween(
+                durationMillis = 2000,
+                easing = LinearEasing
+            ),
+            repeatMode = RepeatMode.Reverse
+        )
+    )
+    val smallCarrotOffset: Offset by infiniteTransition.animateValue(
+        initialValue = Offset(0f, 0f),
+        targetValue = Offset((-13..-8).random().toFloat(), (9..14).random().toFloat()),
+        typeConverter = Offset.VectorConverter,
+        animationSpec = infiniteRepeatable(
+            animation = tween(
+                durationMillis = 2000,
+                easing = LinearEasing,
+                delayMillis = 75
+            ),
+            repeatMode = RepeatMode.Reverse
+        )
+    )
+    val blurredCarrotOffset: Offset by infiniteTransition.animateValue(
+        initialValue = Offset(0f, 0f),
+        targetValue = Offset((8..12).random().toFloat(), (-6..-2).random().toFloat()),
+        typeConverter = Offset.VectorConverter,
+        animationSpec = infiniteRepeatable(
+            animation = tween(
+                durationMillis = 2000,
+                easing = LinearEasing,
+                delayMillis = 250
+            ),
+            repeatMode = RepeatMode.Reverse
+        )
+    )
 
     val imageScale = calculateImageScaleToFullscreen(
         R.drawable.splash_main_logo,
@@ -124,106 +165,14 @@ private fun SplashScreen() {
         screenPxHeight
     )
 
-
     LaunchedEffect(key1 = true) {
-        Log.i("SplashActivity", "Type center: ${center::class.simpleName}")
-        Log.i("SplashActivity", "Type end screen: ${endScreen::class.simpleName} $endScreen")
-        Log.i("SplashActivity", "Type density: ${density.density::class.simpleName}")
-        animationRoutine.launch {
-            coroutineScope {
-                launch {
-                    carrotOffsetX.animateTo(
-                        targetValue = (-13..-8).random().toFloat(),
-                        animationSpec = infiniteRepeatable(
-                            animation = tween(
-                                durationMillis = 2000,
-                                easing = LinearEasing,
-                                delayMillis = 250
-                            ),
-                            repeatMode = RepeatMode.Reverse
-                        )
-                    )
-                }
-                launch {
-                    carrotOffsetY.animateTo(
-                        targetValue = (9..14).random().toFloat(),
-                        animationSpec = infiniteRepeatable(
-                            animation = tween(
-                                durationMillis = 2000,
-                                easing = LinearEasing,
-                                delayMillis = 75
-                            ),
-                            repeatMode = RepeatMode.Reverse
-                        )
-                    )
-                }
-            }
-        }
-        animationRoutine.launch {
-            coroutineScope {
-                launch {
-                    blurredCarrotOffsetX.animateTo(
-                        targetValue = (8..12).random().toFloat(),
-                        animationSpec = infiniteRepeatable(
-                            animation = tween(
-                                durationMillis = 2000,
-                                easing = LinearEasing,
-                                delayMillis = 100
-                            ),
-                            repeatMode = RepeatMode.Reverse
-                        )
-                    )
-                }
-                launch {
-                    blurredCarrotOffsetY.animateTo(
-                        targetValue = (-6..-2).random().toFloat(),
-                        animationSpec = infiniteRepeatable(
-                            animation = tween(
-                                durationMillis = 2000,
-                                easing = LinearEasing,
-                                delayMillis = 250
-                            ),
-                            repeatMode = RepeatMode.Reverse
-                        )
-                    )
-                }
-            }
-        }
-        animationRoutine.launch {
-            coroutineScope {
-                launch {
-                    avocadoOffsetX.animateTo(
-                        targetValue = (5..9).random().toFloat(),
-                        animationSpec = infiniteRepeatable(
-                            animation = tween(
-                                durationMillis = 2000,
-                                easing = LinearEasing
-                            ),
-                            repeatMode = RepeatMode.Reverse
-                        )
-                    )
-                }
-                launch {
-                    avocadoOffsetY.animateTo(
-                        targetValue = (3..7).random().toFloat(),
-                        animationSpec = infiniteRepeatable(
-                            animation = tween(
-                                durationMillis = 2000,
-                                easing = LinearEasing
-                            ),
-                            repeatMode = RepeatMode.Reverse
-                        )
-                    )
-                }
-            }
-        }
-        delay(2000)
+        delay(1500)
         isAnimated = true
-        delay(750)
+        delay(1000)
         burgerSize.animateTo(
             targetValue = imageScale,
             animationSpec = tween(
-                durationMillis = 450,
+                durationMillis = 350,
                 easing = LinearEasing
             )
         )
@@ -265,8 +214,8 @@ private fun SplashScreen() {
                 .zIndex(2f)
                 .scale(1.55f)
                 .offset(
-                    x = 20.dp + avocadoOffsetX.value.dp,
-                    y = 32.dp + avocadoOffsetY.value.dp
+                    x = 20.dp + avocadoOffset.x.dp,
+                    y = 32.dp + avocadoOffset.y.dp
                 )
         )
 
@@ -278,8 +227,8 @@ private fun SplashScreen() {
                     .zIndex(2f)
                     .scale(1.1f)
                     .offset(
-                        x = 15.dp + carrotOffsetX.value.dp,
-                        y = (-20).dp + carrotOffsetY.value.dp
+                        x = 15.dp + smallCarrotOffset.x.dp,
+                        y = (-20).dp + smallCarrotOffset.y.dp
                     )
             )
             Image(
@@ -289,8 +238,8 @@ private fun SplashScreen() {
                     .zIndex(1f)
                     .scale(2f)
                     .offset(
-                        x = blurredCarrotOffsetX.value.dp,
-                        y = blurredCarrotOffsetY.value.dp
+                        x = blurredCarrotOffset.x.dp,
+                        y = blurredCarrotOffset.y.dp
                     )
             )
         }
