@@ -4,25 +4,15 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.animation.core.Animatable
-import androidx.compose.animation.core.FastOutLinearInEasing
-import androidx.compose.animation.core.FastOutSlowInEasing
 import androidx.compose.animation.core.LinearEasing
-import androidx.compose.animation.core.LinearOutSlowInEasing
 import androidx.compose.animation.core.RepeatMode
 import androidx.compose.animation.core.Spring
 import androidx.compose.animation.core.VectorConverter
 import androidx.compose.animation.core.animateDp
-import androidx.compose.animation.core.animateDpAsState
-import androidx.compose.animation.core.animateFloat
-import androidx.compose.animation.core.animateOffset
-import androidx.compose.animation.core.animateOffsetAsState
-import androidx.compose.animation.core.animateValue
 import androidx.compose.animation.core.infiniteRepeatable
-import androidx.compose.animation.core.rememberInfiniteTransition
 import androidx.compose.animation.core.spring
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.core.updateTransition
@@ -38,10 +28,8 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -55,18 +43,14 @@ import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.imageResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.PreviewScreenSizes
-import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.compose.ui.zIndex
 import bob.colbaskin.ufood.ui.theme.CustomTheme
 import bob.colbaskin.ufood.ui.theme.UFOODTheme
 import bob.colbaskin.ufood.utils.calculateImageScaleToFullscreen
 import bob.colbaskin.ufood.utils.CustomDarkPreview
 import bob.colbaskin.ufood.utils.CustomLightPreview
-import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
@@ -119,45 +103,9 @@ private fun SplashScreen() {
     }
     val burgerSize = remember { Animatable(1f) }
 
-    val infiniteTransition = rememberInfiniteTransition()
-    val avocadoOffset: Offset by infiniteTransition.animateValue(
-        initialValue = Offset(0f, 0f),
-        targetValue = Offset((5..9).random().toFloat(), (3..7).random().toFloat()),
-        typeConverter = Offset.VectorConverter,
-        animationSpec = infiniteRepeatable(
-            animation = tween(
-                durationMillis = 2000,
-                easing = LinearEasing
-            ),
-            repeatMode = RepeatMode.Reverse
-        )
-    )
-    val smallCarrotOffset: Offset by infiniteTransition.animateValue(
-        initialValue = Offset(0f, 0f),
-        targetValue = Offset((-13..-8).random().toFloat(), (9..14).random().toFloat()),
-        typeConverter = Offset.VectorConverter,
-        animationSpec = infiniteRepeatable(
-            animation = tween(
-                durationMillis = 2000,
-                easing = LinearEasing,
-                delayMillis = 75
-            ),
-            repeatMode = RepeatMode.Reverse
-        )
-    )
-    val blurredCarrotOffset: Offset by infiniteTransition.animateValue(
-        initialValue = Offset(0f, 0f),
-        targetValue = Offset((8..12).random().toFloat(), (-6..-2).random().toFloat()),
-        typeConverter = Offset.VectorConverter,
-        animationSpec = infiniteRepeatable(
-            animation = tween(
-                durationMillis = 2000,
-                easing = LinearEasing,
-                delayMillis = 250
-            ),
-            repeatMode = RepeatMode.Reverse
-        )
-    )
+    val avocadoOffset = remember { Animatable(Offset(0f, 0f), Offset.VectorConverter) }
+    val smallCarrotOffset = remember { Animatable(Offset(0f, 0f), Offset.VectorConverter) }
+    val blurredCarrotOffset = remember { Animatable(Offset(0f, 0f), Offset.VectorConverter) }
 
     val imageScale = calculateImageScaleToFullscreen(
         R.drawable.splash_main_logo,
@@ -166,15 +114,39 @@ private fun SplashScreen() {
     )
 
     LaunchedEffect(key1 = true) {
+        launch {
+            avocadoOffset.animateTo(
+                targetValue = Offset((5..9).random().toFloat(), (3..7).random().toFloat()),
+                animationSpec = infiniteRepeatable(
+                    animation = tween(2000, easing = LinearEasing),
+                    repeatMode = RepeatMode.Reverse
+                )
+            )
+        }
+        launch {
+            smallCarrotOffset.animateTo(
+                targetValue = Offset((-13..-8).random().toFloat(), (9..14).random().toFloat()),
+                animationSpec = infiniteRepeatable(
+                    animation = tween(2000, easing = LinearEasing, delayMillis = 75),
+                    repeatMode = RepeatMode.Reverse
+                )
+            )
+        }
+        launch {
+            blurredCarrotOffset.animateTo(
+                targetValue = Offset((8..12).random().toFloat(), (-6..-2).random().toFloat()),
+                animationSpec = infiniteRepeatable(
+                    animation = tween(2000, easing = LinearEasing, delayMillis = 250),
+                    repeatMode = RepeatMode.Reverse
+                )
+            )
+        }
         delay(1500)
         isAnimated = true
         delay(1000)
         burgerSize.animateTo(
             targetValue = imageScale,
-            animationSpec = tween(
-                durationMillis = 350,
-                easing = LinearEasing
-            )
+            animationSpec = tween(350, easing = LinearEasing)
         )
 
         context.startActivity(Intent(context, MainActivity::class.java))
@@ -213,10 +185,13 @@ private fun SplashScreen() {
                 .align(Alignment.TopEnd)
                 .zIndex(2f)
                 .scale(1.55f)
-                .offset(
-                    x = 20.dp + avocadoOffset.x.dp,
-                    y = 32.dp + avocadoOffset.y.dp
-                )
+                .offset(x = 20.dp, y = 32.dp)
+                .offset {
+                    IntOffset(
+                        x = avocadoOffset.value.x.toInt(),
+                        y = avocadoOffset.value.y.toInt()
+                    )
+                }
         )
 
         Box (modifier = Modifier.align(Alignment.BottomStart)) {
@@ -226,10 +201,13 @@ private fun SplashScreen() {
                 modifier = Modifier
                     .zIndex(2f)
                     .scale(1.1f)
-                    .offset(
-                        x = 15.dp + smallCarrotOffset.x.dp,
-                        y = (-20).dp + smallCarrotOffset.y.dp
-                    )
+                    .offset(x = 15.dp, y = (-20).dp)
+                    .offset {
+                        IntOffset(
+                            x = smallCarrotOffset.value.x.toInt(),
+                            y = smallCarrotOffset.value.y.toInt()
+                        )
+                    }
             )
             Image(
                 painter = painterResource(R.drawable.blurred_carrot),
@@ -237,10 +215,13 @@ private fun SplashScreen() {
                 modifier = Modifier
                     .zIndex(1f)
                     .scale(2f)
-                    .offset(
-                        x = blurredCarrotOffset.x.dp,
-                        y = blurredCarrotOffset.y.dp
-                    )
+                    .offset {
+                        IntOffset(
+                            x = blurredCarrotOffset.value.x.toInt(),
+                            y = blurredCarrotOffset.value.y.toInt()
+                        )
+                    }
+
             )
         }
         

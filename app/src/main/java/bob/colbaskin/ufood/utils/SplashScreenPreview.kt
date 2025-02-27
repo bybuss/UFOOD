@@ -59,7 +59,7 @@ import androidx.compose.ui.tooling.preview.Preview
     showBackground = true,
     uiMode = UI_MODE_NIGHT_YES
 )
-annotation class CustomDarkPreview()
+annotation class CustomDarkPreview
 
 @Retention(AnnotationRetention.BINARY)
 @Target(
@@ -115,4 +115,4 @@ annotation class CustomDarkPreview()
     showBackground = true,
     uiMode = UI_MODE_NIGHT_NO
 )
-annotation class CustomLightPreview()
+annotation class CustomLightPreview
