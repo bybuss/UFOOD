@@ -1,12 +1,43 @@
 package bob.colbaskin.ufood.ui.theme
 
+import androidx.compose.runtime.Immutable
+import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.graphics.Color
 
-val Purple80 = Color(0xFFD0BCFF)
-val PurpleGrey80 = Color(0xFFCCC2DC)
-val Pink80 = Color(0xFFEFB8C8)
+@Immutable
+data class CustomColors(
+    val background: Color,
+    val primaryButton: Color,
+    val authButton: Color,
+    val buyButton: Color,
+    val sendButton: Color,
+    val cardSurface: Color
+)
 
-val Purple40 = Color(0xFF6650a4)
-val PurpleGrey40 = Color(0xFF625b71)
-val Pink40 = Color(0xFF7D5260)
+val localCustomColors = staticCompositionLocalOf {
+    CustomColors(
+        background = Color.Unspecified,
+        primaryButton = Color.Unspecified,
+        authButton = Color.Unspecified,
+        buyButton = Color.Unspecified,
+        sendButton = Color.Unspecified,
+        cardSurface = Color.Unspecified
+    )
+}
 
+val customColorsDark = CustomColors(
+    background = Color(0xFF252830),
+    primaryButton = Color(0xFF575C6A),
+    authButton = Color(0xFFFE8745),
+    buyButton = Color(0xFFB1FF9C),
+    sendButton = Color(0xFFFFFFFF),
+    cardSurface = Color(0xFF292C34)
+)
+val customColorsLight = CustomColors(
+    background = Color(0xFFADADA6),
+    primaryButton = Color(0xFF575C6A),
+    authButton = Color(0xFFFE8745),
+    buyButton = Color(0xFFB1FF9C),
+    sendButton = Color(0xFFFFFFFF),
+    cardSurface = Color(0xFF292C34)
+)

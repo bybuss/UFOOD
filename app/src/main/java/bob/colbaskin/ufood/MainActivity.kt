@@ -15,7 +15,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import bob.colbaskin.ufood.ui.theme.CustomColors
 import bob.colbaskin.ufood.ui.theme.CustomTheme
 import bob.colbaskin.ufood.ui.theme.UFOODTheme
 

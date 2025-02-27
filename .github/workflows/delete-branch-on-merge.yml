@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Delete merged brunch
-        uses: koj-co/delete-merged-brunch@master
+        uses: koj-co/delete-merged-action@master
         with:
           branches: "!main, !production, *"
         env:
