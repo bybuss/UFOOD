@@ -15,8 +15,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import bob.colbaskin.ufood.ui.theme.CustomTheme
-import bob.colbaskin.ufood.ui.theme.UFOODTheme
+import bob.colbaskin.designsystem.ui.theme.UFOODTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -44,7 +43,7 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
         Button(
             onClick = {},
             colors = ButtonDefaults.buttonColors(
-                containerColor = CustomTheme.colors.authButton
+                containerColor = bob.colbaskin.designsystem.ui.theme.CustomTheme.colors.authButton
             )
         ) {
             Text(text = "Hello $name!")
@@ -55,7 +54,7 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
 @Preview(showBackground = true)
 @Composable
 fun GreetingPreview() {
-    UFOODTheme {
+    bob.colbaskin.designsystem.ui.theme.UFOODTheme {
         Greeting("Android")
     }
 }

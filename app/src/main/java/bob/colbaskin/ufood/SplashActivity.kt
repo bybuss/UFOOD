@@ -21,6 +21,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
@@ -46,8 +47,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
-import bob.colbaskin.ufood.ui.theme.CustomTheme
-import bob.colbaskin.ufood.ui.theme.UFOODTheme
+import bob.colbaskin.designsystem.ui.theme.UFOODTheme
 import bob.colbaskin.ufood.utils.calculateImageScaleToFullscreen
 import bob.colbaskin.ufood.utils.CustomDarkPreview
 import bob.colbaskin.ufood.utils.CustomLightPreview
@@ -156,7 +156,7 @@ private fun SplashScreen() {
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(color = CustomTheme.colors.background)
+            .background(color = bob.colbaskin.designsystem.ui.theme.CustomTheme.colors.background)
     ) {
 
         Column(
@@ -173,7 +173,7 @@ private fun SplashScreen() {
             )
             Text(
                 text = stringResource(R.string.app_name),
-                style = CustomTheme.typography.headLineLarge,
+                style = bob.colbaskin.designsystem.ui.theme.CustomTheme.typography.displayLarge,
                 color = Color.White
             )
         }
@@ -241,7 +241,8 @@ private fun SplashScreen() {
 @CustomDarkPreview
 @Composable
 fun SplashPreviewDark() {
-    UFOODTheme  {
+    UFOODTheme {
         SplashScreen()
     }
 }
+

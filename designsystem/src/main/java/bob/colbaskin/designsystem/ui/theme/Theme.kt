@@ -1,4 +1,4 @@
-package bob.colbaskin.ufood.ui.theme
+package bob.colbaskin.designsystem.ui.theme
 
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.runtime.Composable
@@ -16,7 +16,9 @@ fun UFOODTheme(
 
     CompositionLocalProvider (
         localCustomColors provides customColors,
-        localCustomTypography provides customTypography,
+        localCustomTypography provides MadeInfinityTypography,
+        localCustomShapes provides CustomShapes(),
+        localCustomDimensions provides CustomDimensions(),
         content = content
     )
 }
@@ -26,4 +28,8 @@ object CustomTheme {
         @Composable get() = localCustomColors.current
     val typography: CustomTypography
         @Composable get() = localCustomTypography.current
+    val shapes: CustomShapes
+        @Composable get() = localCustomShapes.current
+    val dimensions: CustomDimensions
+        @Composable get() = localCustomDimensions.current
 }
