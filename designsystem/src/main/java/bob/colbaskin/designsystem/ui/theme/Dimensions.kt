@@ -17,6 +17,7 @@ data class CustomDimensions(
     val dimensions48: Dp = 48.dp,
     val dimensions56: Dp = 56.dp,
     val dimensions64: Dp = 64.dp,
+    val dimensions80: Dp = 80.dp,
     val dimensions100: Dp = 100.dp,
     val dimensions128: Dp = 128.dp,
     val dimensions142: Dp = 142.dp,

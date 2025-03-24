@@ -16,16 +16,9 @@ enum class ButtonType {
 }
 
 fun ButtonType.getTextType(): TextType = when(this) {
-    ButtonType.NEXT -> TextType.TITLE_MEDIUM
+    ButtonType.NEXT -> TextType.TITLE_LARGE
     ButtonType.BUY_INGREDIENTS -> TextType.TITLE_MEDIUM
-    ButtonType.TEXT -> TextType.TITLE_SMALL
-}
-
-@Composable
-fun ButtonType.getButtonElevation() = when(this) {
-    ButtonType.NEXT -> ButtonDefaults.elevatedButtonElevation()
-    ButtonType.BUY_INGREDIENTS -> ButtonDefaults.buttonElevation()
-    ButtonType.TEXT -> ButtonDefaults.elevatedButtonElevation()
+    ButtonType.TEXT -> TextType.TITLE_LARGE
 }
 
 @Composable
@@ -39,7 +32,7 @@ fun ButtonType.getButtonColors() = when(this) {
 }
 
 @Composable
-fun Modifier.buttonSize(isFulWidth: Boolean, isMainButton: Boolean) = if (isFulWidth) {
+fun Modifier.getButtonSize(isFullWidth: Boolean, isMainButton: Boolean) = if (isFullWidth) {
     fillMaxWidth()
 } else {
     width(CustomTheme.dimensions.dimensions100)
@@ -52,7 +45,7 @@ fun Modifier.buttonSize(isFulWidth: Boolean, isMainButton: Boolean) = if (isFulW
 )
 
 @Composable
-fun Modifier.iconSize(buttonType: ButtonType) = when(buttonType) {
-    ButtonType.NEXT -> size(CustomTheme.dimensions.dimensions100)
+fun Modifier.getIconSize(buttonType: ButtonType) = when(buttonType) {
+    ButtonType.NEXT -> size(CustomTheme.dimensions.dimensions80)
     else -> size(CustomTheme.dimensions.dimensions24)
 }

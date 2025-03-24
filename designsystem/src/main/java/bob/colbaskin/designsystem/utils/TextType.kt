@@ -1,6 +1,7 @@
 package bob.colbaskin.designsystem.utils
 
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.text.TextStyle
 import bob.colbaskin.designsystem.ui.theme.CustomTheme
 
 enum class TextType {
@@ -21,21 +22,43 @@ enum class TextType {
     LABEL_SMALL,
 }
 
+enum class FontFamilyKey {
+    MADE_INFINITY,
+    NUNITO,
+    BRIGHTO_WANDER,
+    GILROY,
+    INTER,
+    ADIGIANA_ULTRA,
+    AIRFOOL
+}
+
 @Composable
-fun TextType.getTextStyle() = when(this) {
-    TextType.DISPLAY_LARGE -> CustomTheme.typography.displayLarge
-    TextType.DISPLAY_MEDIUM -> CustomTheme.typography.displayMedium
-    TextType.DISPLAY_SMALL -> CustomTheme.typography.displaySmall
-    TextType.HEADLINE_LARGE -> CustomTheme.typography.labelLarge
-    TextType.HEADLINE_MEDIUM -> CustomTheme.typography.headlineMedium
-    TextType.HEADLINE_SMALL -> CustomTheme.typography.headlineSmall
-    TextType.TITLE_LARGE -> CustomTheme.typography.titleLarge
-    TextType.TITLE_MEDIUM -> CustomTheme.typography.titleMedium
-    TextType.TITLE_SMALL -> CustomTheme.typography.titleSmall
-    TextType.BODY_LARGE -> CustomTheme.typography.bodyLarge
-    TextType.BODY_MEDIUM -> CustomTheme.typography.bodyMedium
-    TextType.BODY_SMALL -> CustomTheme.typography.bodySmall
-    TextType.LABEL_LARGE -> CustomTheme.typography.labelLarge
-    TextType.LABEL_MEDIUM -> CustomTheme.typography.labelMedium
-    TextType.LABEL_SMALL -> CustomTheme.typography.labelSmall
+fun TextType.getTextStyle(fontFamily: FontFamilyKey = FontFamilyKey.INTER): TextStyle {
+    val typography = when(fontFamily) {
+        FontFamilyKey.MADE_INFINITY -> CustomTheme.typography.madeInfinity
+        FontFamilyKey.NUNITO -> CustomTheme.typography.nunito
+        FontFamilyKey.BRIGHTO_WANDER -> CustomTheme.typography.brightoWander
+        FontFamilyKey.GILROY -> CustomTheme.typography.gilroy
+        FontFamilyKey.INTER -> CustomTheme.typography.inter
+        FontFamilyKey.ADIGIANA_ULTRA -> CustomTheme.typography.adigianaUltra
+        FontFamilyKey.AIRFOOL -> CustomTheme.typography.airfool
+    }
+
+    return when(this) {
+        TextType.DISPLAY_LARGE -> typography.displayLarge
+        TextType.DISPLAY_MEDIUM -> typography.displayMedium
+        TextType.DISPLAY_SMALL -> typography.displaySmall
+        TextType.HEADLINE_LARGE -> typography.headlineLarge
+        TextType.HEADLINE_MEDIUM -> typography.headlineMedium
+        TextType.HEADLINE_SMALL -> typography.headlineSmall
+        TextType.TITLE_LARGE -> typography.titleLarge
+        TextType.TITLE_MEDIUM -> typography.titleMedium
+        TextType.TITLE_SMALL -> typography.titleSmall
+        TextType.BODY_LARGE -> typography.bodyLarge
+        TextType.BODY_MEDIUM -> typography.bodyMedium
+        TextType.BODY_SMALL -> typography.bodySmall
+        TextType.LABEL_LARGE -> typography.labelLarge
+        TextType.LABEL_MEDIUM -> typography.labelMedium
+        TextType.LABEL_SMALL -> typography.labelSmall
+    }
 }

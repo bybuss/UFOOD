@@ -43,5 +43,5 @@ val customColorsLight = CustomColors(
     buyButton = Color(0xFFB1FF9C),
     sendButton = Color(0xFFFFFFFF),
     cardSurface = Color(0xFF292C34),
-    Color(0xFF000000)
+    text = Color(0xFF000000)
 )
