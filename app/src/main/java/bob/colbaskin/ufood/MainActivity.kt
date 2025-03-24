@@ -57,5 +57,7 @@ fun AppContent() {
 @CustomLightPreview
 @CustomDarkPreview
 fun AppPreview() {
-    AppContent()
+    UFOODTheme {
+        AppContent()
+    }
 }

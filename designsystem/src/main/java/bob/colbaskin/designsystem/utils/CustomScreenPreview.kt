@@ -11,15 +11,6 @@ import androidx.compose.ui.tooling.preview.Preview
     AnnotationTarget.FUNCTION
 )
 @Preview(
-    name = "My Phone",
-    group = "Dark",
-    widthDp = 720,
-    heightDp = 1640,
-    showSystemUi = true,
-    showBackground = true,
-    uiMode = UI_MODE_NIGHT_YES
-)
-@Preview(
     name = "Phone",
     group = "Dark",
     device = Devices.PIXEL_7,
@@ -65,15 +56,6 @@ annotation class CustomDarkPreview
 @Target(
     AnnotationTarget.ANNOTATION_CLASS,
     AnnotationTarget.FUNCTION
-)
-@Preview(
-    name = "My Phone",
-    group = "Light",
-    widthDp = 720,
-    heightDp = 1640,
-    showSystemUi = true,
-    showBackground = true,
-    uiMode = UI_MODE_NIGHT_NO
 )
 @Preview(
     name = "Phone",
