@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.TextStyle
 import bob.colbaskin.designsystem.ui.theme.CustomTheme
 
 enum class ButtonType {
@@ -15,19 +16,21 @@ enum class ButtonType {
     TEXT
 }
 
-fun ButtonType.getTextType(): TextType = when(this) {
-    ButtonType.NEXT -> TextType.TITLE_LARGE
-    ButtonType.BUY_INGREDIENTS -> TextType.TITLE_MEDIUM
-    ButtonType.TEXT -> TextType.TITLE_LARGE
+@Composable
+fun ButtonType.getTextType(): TextStyle  = when(this) {
+    ButtonType.NEXT -> CustomTheme.typography.madeInfinity.titleMedium
+    ButtonType.BUY_INGREDIENTS -> CustomTheme.typography.inter.titleSmall
+    ButtonType.TEXT -> CustomTheme.typography.inter.titleMedium
 }
 
 @Composable
 fun ButtonType.getButtonColors() = when(this) {
     ButtonType.NEXT -> ButtonDefaults.buttonColors(
-        containerColor = CustomTheme.colors.primaryButton,
-        contentColor = CustomTheme.colors.sendButton
+        containerColor = CustomTheme.colors.primaryButton
     )
-    ButtonType.BUY_INGREDIENTS -> ButtonDefaults.elevatedButtonColors()
+    ButtonType.BUY_INGREDIENTS -> ButtonDefaults.buttonColors(
+        containerColor = CustomTheme.colors.buyButton
+    )
     ButtonType.TEXT -> ButtonDefaults.textButtonColors()
 }
 

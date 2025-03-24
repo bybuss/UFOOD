@@ -1,5 +1,6 @@
 package bob.colbaskin.designsystem
 
+import android.content.res.Configuration.UI_MODE_NIGHT_YES
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -9,11 +10,11 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -46,7 +47,8 @@ fun NextButton(
         ) {
             CustomText(
                 text = text,
-                textType = ButtonType.NEXT.getTextType()
+                textStyle = ButtonType.NEXT.getTextType(),
+                color = Color.White
             )
             Image(
                 painter = painterResource(icon),
@@ -88,8 +90,9 @@ fun BuyButton(
             )
             CustomText(
                 text = text,
-                textType = ButtonType.BUY_INGREDIENTS.getTextType(),
+                textStyle = ButtonType.BUY_INGREDIENTS.getTextType(),
                 textAlign = TextAlign.Center,
+                color = Color.Black
             )
             Image(
                 painter = painterResource(icon),
@@ -103,6 +106,26 @@ fun BuyButton(
 @Preview(showBackground = true)
 @Composable
 fun BuyButtonPreview() {
+    UFOODTheme {
+        Column(modifier = Modifier.padding(CustomTheme.dimensions.dimensions16)) {
+            NextButton(
+                text = "Продолжить",
+                icon = R.drawable.arrows,
+                onClick = { },
+            )
+            Spacer(modifier = Modifier.padding(CustomTheme.dimensions.dimensions16))
+            BuyButton(
+                text = "Купить ингридиенты",
+                icon = R.drawable.bag,
+                onClick = { },
+            )
+        }
+    }
+}
+
+@Preview(uiMode = UI_MODE_NIGHT_YES)
+@Composable
+fun BuyButtonPreviewDarkTheme() {
     UFOODTheme {
         Column(modifier = Modifier.padding(CustomTheme.dimensions.dimensions16)) {
             NextButton(

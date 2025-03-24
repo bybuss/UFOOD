@@ -49,7 +49,7 @@ data class TypographyWeights(
 
 fun createMaterial3Typography(
     fontFamily: FontFamily,
-    weights: TypographyWeights = TypographyWeights()
+    weights: TypographyWeights = TypographyWeights(),
 ) = CustomTypography(
     displayLarge = TextStyle(
         fontFamily = fontFamily,

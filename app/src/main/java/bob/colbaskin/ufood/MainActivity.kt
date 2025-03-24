@@ -4,18 +4,20 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
+import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
+import bob.colbaskin.designsystem.BuyButton
+import bob.colbaskin.designsystem.NextButton
+import bob.colbaskin.designsystem.R
+import bob.colbaskin.designsystem.ui.theme.CustomTheme
 import bob.colbaskin.designsystem.ui.theme.UFOODTheme
+import bob.colbaskin.designsystem.utils.CustomDarkPreview
+import bob.colbaskin.designsystem.utils.CustomLightPreview
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -23,11 +25,8 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             UFOODTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
+                Surface (modifier = Modifier.fillMaxSize()) {
+                    AppContent()
                 }
             }
         }
@@ -35,26 +34,28 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Box (
-        modifier = modifier.fillMaxSize(),
-        contentAlignment = Alignment.Center
+fun AppContent() {
+    Column(
+        modifier = Modifier.padding(CustomTheme.dimensions.dimensions16),
+        horizontalAlignment = androidx.compose.ui.Alignment.CenterHorizontally
     ) {
-        Button(
-            onClick = {},
-            colors = ButtonDefaults.buttonColors(
-                containerColor = bob.colbaskin.designsystem.ui.theme.CustomTheme.colors.authButton
-            )
-        ) {
-            Text(text = "Hello $name!")
-        }
+        NextButton(
+            text = "Продолжить",
+            icon = R.drawable.arrows,
+            onClick = { },
+        )
+        Spacer(modifier = Modifier.padding(CustomTheme.dimensions.dimensions16))
+        BuyButton(
+            text = "Купить ингридиенты",
+            icon = R.drawable.bag,
+            onClick = { },
+        )
     }
 }
 
-@Preview(showBackground = true)
 @Composable
-fun GreetingPreview() {
-    bob.colbaskin.designsystem.ui.theme.UFOODTheme {
-        Greeting("Android")
-    }
+@CustomLightPreview
+@CustomDarkPreview
+fun AppPreview() {
+    AppContent()
 }
