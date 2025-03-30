@@ -1,4 +1,4 @@
-package bob.colbaskin.ufood.ui.theme
+package bob.colbaskin.designsystem.ui.theme
 
 import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.staticCompositionLocalOf
@@ -11,7 +11,10 @@ data class CustomColors(
     val authButton: Color,
     val buyButton: Color,
     val sendButton: Color,
-    val cardSurface: Color
+    val cardSurface: Color,
+    val errorContainer: Color,
+    val onErrorContainer: Color,
+    val text: Color,
 )
 
 val localCustomColors = staticCompositionLocalOf {
@@ -21,7 +24,10 @@ val localCustomColors = staticCompositionLocalOf {
         authButton = Color.Unspecified,
         buyButton = Color.Unspecified,
         sendButton = Color.Unspecified,
-        cardSurface = Color.Unspecified
+        cardSurface = Color.Unspecified,
+        errorContainer = Color.Unspecified,
+        onErrorContainer = Color.Unspecified,
+        text = Color.Unspecified,
     )
 }
 
@@ -31,7 +37,10 @@ val customColorsDark = CustomColors(
     authButton = Color(0xFFFE8745),
     buyButton = Color(0xFFB1FF9C),
     sendButton = Color(0xFFFFFFFF),
-    cardSurface = Color(0xFF292C34)
+    cardSurface = Color(0xFF292C34),
+    errorContainer = Color.Red,
+    onErrorContainer = Color.White,
+    text = Color(0xFFFFFFFF)
 )
 val customColorsLight = CustomColors(
     background = Color(0xFFADADA6),
@@ -39,5 +48,8 @@ val customColorsLight = CustomColors(
     authButton = Color(0xFFFE8745),
     buyButton = Color(0xFFB1FF9C),
     sendButton = Color(0xFFFFFFFF),
-    cardSurface = Color(0xFF292C34)
+    cardSurface = Color(0xFF292C34),
+    errorContainer = Color.Red,
+    onErrorContainer = Color.White,
+    text = Color(0xFF000000)
 )

@@ -46,11 +46,11 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
-import bob.colbaskin.ufood.ui.theme.CustomTheme
-import bob.colbaskin.ufood.ui.theme.UFOODTheme
+import bob.colbaskin.designsystem.ui.theme.CustomTheme
+import bob.colbaskin.designsystem.ui.theme.UFOODTheme
 import bob.colbaskin.ufood.utils.calculateImageScaleToFullscreen
-import bob.colbaskin.ufood.utils.CustomDarkPreview
-import bob.colbaskin.ufood.utils.CustomLightPreview
+import bob.colbaskin.designsystem.utils.CustomDarkPreview
+import bob.colbaskin.designsystem.utils.CustomLightPreview
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
@@ -173,7 +173,7 @@ private fun SplashScreen() {
             )
             Text(
                 text = stringResource(R.string.app_name),
-                style = CustomTheme.typography.headLineLarge,
+                style = CustomTheme.typography.madeInfinity.displayLarge,
                 color = Color.White
             )
         }
@@ -241,7 +241,8 @@ private fun SplashScreen() {
 @CustomDarkPreview
 @Composable
 fun SplashPreviewDark() {
-    UFOODTheme  {
+    UFOODTheme {
         SplashScreen()
     }
 }
+

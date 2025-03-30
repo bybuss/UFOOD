@@ -1,4 +1,4 @@
-package bob.colbaskin.ufood.utils
+package bob.colbaskin.designsystem.utils
 
 import android.content.res.Configuration.UI_MODE_NIGHT_NO
 import android.content.res.Configuration.UI_MODE_NIGHT_YES
@@ -9,15 +9,6 @@ import androidx.compose.ui.tooling.preview.Preview
 @Target(
     AnnotationTarget.ANNOTATION_CLASS,
     AnnotationTarget.FUNCTION
-)
-@Preview(
-    name = "My Phone",
-    group = "Dark",
-    widthDp = 720,
-    heightDp = 1640,
-    showSystemUi = true,
-    showBackground = true,
-    uiMode = UI_MODE_NIGHT_YES
 )
 @Preview(
     name = "Phone",
@@ -65,15 +56,6 @@ annotation class CustomDarkPreview
 @Target(
     AnnotationTarget.ANNOTATION_CLASS,
     AnnotationTarget.FUNCTION
-)
-@Preview(
-    name = "My Phone",
-    group = "Light",
-    widthDp = 720,
-    heightDp = 1640,
-    showSystemUi = true,
-    showBackground = true,
-    uiMode = UI_MODE_NIGHT_NO
 )
 @Preview(
     name = "Phone",
