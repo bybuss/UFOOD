@@ -42,13 +42,11 @@ fun createAnnotatedString(
                     is SpanType.UrlSpan -> withLink(LinkAnnotation.Url(url, styles)) {
                         append(text)
                     }
-
                     is SpanType.ClickSpan -> withLink(
                         LinkAnnotation.Clickable(text, styles) { onClick() }
                     ) {
                         append(text)
                     }
-
                     is SpanType.HeadingSpan -> withStyle(styles) { append(text) }
                 }
             }

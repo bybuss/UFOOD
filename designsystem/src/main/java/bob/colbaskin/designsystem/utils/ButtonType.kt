@@ -38,7 +38,7 @@ fun ButtonType.getButtonColors() = when(this) {
 fun Modifier.getButtonSize(isFullWidth: Boolean, isMainButton: Boolean) = if (isFullWidth) {
     fillMaxWidth()
 } else {
-    width(CustomTheme.dimensions.dimensions100)
+    width(CustomTheme.dimensions.dimensions180)
 }.height(
     if (isMainButton) {
         CustomTheme.dimensions.dimensions64

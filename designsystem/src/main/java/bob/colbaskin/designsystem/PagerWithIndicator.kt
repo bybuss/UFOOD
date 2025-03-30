@@ -9,7 +9,6 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.PagerState
 import androidx.compose.runtime.Composable
@@ -78,7 +77,7 @@ private fun PagerIndicator(
 
             Box(
                 modifier = Modifier
-                    .width(width)
+                    .height(width)
                     .size(CustomTheme.dimensions.dimensions16)
                     .clip(shape)
                     .background(color)
