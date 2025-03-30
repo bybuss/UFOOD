@@ -12,6 +12,8 @@ data class CustomColors(
     val buyButton: Color,
     val sendButton: Color,
     val cardSurface: Color,
+    val errorContainer: Color,
+    val onErrorContainer: Color,
     val text: Color,
 )
 
@@ -23,6 +25,8 @@ val localCustomColors = staticCompositionLocalOf {
         buyButton = Color.Unspecified,
         sendButton = Color.Unspecified,
         cardSurface = Color.Unspecified,
+        errorContainer = Color.Unspecified,
+        onErrorContainer = Color.Unspecified,
         text = Color.Unspecified,
     )
 }
@@ -34,6 +38,8 @@ val customColorsDark = CustomColors(
     buyButton = Color(0xFFB1FF9C),
     sendButton = Color(0xFFFFFFFF),
     cardSurface = Color(0xFF292C34),
+    errorContainer = Color.Red,
+    onErrorContainer = Color.White,
     text = Color(0xFFFFFFFF)
 )
 val customColorsLight = CustomColors(
@@ -43,5 +49,7 @@ val customColorsLight = CustomColors(
     buyButton = Color(0xFFB1FF9C),
     sendButton = Color(0xFFFFFFFF),
     cardSurface = Color(0xFF292C34),
+    errorContainer = Color.Red,
+    onErrorContainer = Color.White,
     text = Color(0xFF000000)
 )
