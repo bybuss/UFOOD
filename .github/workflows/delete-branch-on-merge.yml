@@ -1,20 +1,15 @@
-name: Merge PRs
-
+name: Auto-delete merged branches
 on:
   pull_request:
-    types:
-      - opened
-      - closed
-      - edited
-      - reopened
-
+    types: [closed]
+    branches: [main]
 jobs:
-  automerge:
+  delete-branch:
     runs-on: ubuntu-latest
+    if: github.event.pull_request.merged == true
     steps:
-      - name: Delete merged brunch
-        uses: koj-co/delete-merged-action@master
+      - uses: koj-co/delete-merged-action@v1.0.0
         with:
           branches: "!main, !production, *"
         env:
-          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
