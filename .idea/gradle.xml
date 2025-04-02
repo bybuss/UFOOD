@@ -23,6 +23,8 @@
             <option value="$PROJECT_DIR$/feature/onboarding/data" />
             <option value="$PROJECT_DIR$/feature/onboarding/domain" />
             <option value="$PROJECT_DIR$/feature/onboarding/presentation" />
+            <option value="$PROJECT_DIR$/storage" />
+            <option value="$PROJECT_DIR$/storage/datastore" />
           </set>
         </option>
         <option name="resolveExternalAnnotations" value="false" />
