@@ -1,8 +1,7 @@
 [versions]
-androidxCoreSplashscreen = "1.0.1"
 agp = "8.8.2"
-kotlin = "2.0.0"
-kotlinxSerializationJson = "1.6.1"
+kotlin = "2.1.0"
+kotlinxSerializationJson = "1.8.0"
 koin-bom = "4.0.1"
 coreKtx = "1.15.0"
 junit = "4.13.2"
@@ -10,13 +9,19 @@ junitVersion = "1.2.1"
 espressoCore = "3.6.1"
 lifecycleRuntimeKtx = "2.8.7"
 activityCompose = "1.10.1"
-composeBom = "2025.02.00"
-composeNavigation = "2.8.5"
+composeBom = "2025.03.01"
+composeNavigation = "2.8.9"
 spotless = "6.25.0"
 appcompat = "1.7.0"
 material = "1.12.0"
 uiTooling = "1.7.8"
 lottieCompose = "6.6.3"
+jetbrainsKotlinJvm = "2.0.0"
+arrowCore = "1.2.0-RC"
+protobuf = "4.26.1"
+datastore = "1.1.2"
+protobufPlugin = "0.9.4"
+composeRuntime = "1.7.6"
 
 
 [libraries]
@@ -51,6 +56,16 @@ koin-viewmodel = { module = "io.insert-koin:koin-compose-viewmodel"}
 navigation-compose = { module = "androidx.navigation:navigation-compose", version.ref = "composeNavigation" }
 kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinxSerializationJson" }
 
+# arrow
+arrow-core = { module = "io.arrow-kt:arrow-core", version.ref = "arrowCore" }
+
+# datastore
+androidx-datastore = { group = "androidx.datastore", name = "datastore", version.ref = "datastore" }
+androidx-datastore-core = { module = "androidx.datastore:datastore-preferences-core", version.ref = "datastore" }
+protobuf-protoc = { group = "com.google.protobuf", name = "protoc", version.ref = "protobuf" }
+protobuf-kotlin-lite = { group = "com.google.protobuf", name = "protobuf-kotlin-lite", version.ref = "protobuf" }
+android-compose-runtime = { group = "androidx.compose.runtime", name = "runtime", version.ref = "composeRuntime" }
+
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
@@ -60,3 +75,7 @@ android-library = { id = "com.android.library", version.ref = "agp" }
 
 #Kotlin serialization
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
+jetbrains-kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "jetbrainsKotlinJvm" }
+
+# protobuf
+protobuf = { id = "com.google.protobuf", version.ref = "protobufPlugin" }
