@@ -44,15 +44,14 @@ private fun OnBoarding(onNextScreen: () -> Unit) {
         val pageCount = stringArrayResource(R.array.onboarding_title).size
         val pagerState = rememberPagerState(
             initialPage = 0,
+            initialPageOffsetFraction = 0f,
             pageCount = { pageCount }
         )
-
         val buttonText = if (pagerState.currentPage == pageCount - 1) {
             stringResource(R.string.welcome_get_started)
         } else {
             stringResource(R.string.next)
         }
-
         PagerWithIndicator(
             pageCount = pageCount,
             modifier = Modifier
@@ -97,7 +96,7 @@ private fun OnBoarding(onNextScreen: () -> Unit) {
             onClick = {
                 coroutineScope.launch {
                     if (pagerState.currentPage < pageCount - 1) {
-                        pagerState.animateScrollToPage(pageCount + 1)
+                        pagerState.animateScrollToPage(pagerState.currentPage + 1)
                     } else {
                         onNextScreen()
                     }

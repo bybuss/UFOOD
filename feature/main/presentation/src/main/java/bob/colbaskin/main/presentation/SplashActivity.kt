@@ -1,4 +1,4 @@
-package bob.colbaskin.ufood
+package bob.colbaskin.main.presentation
 
 import android.annotation.SuppressLint
 import android.app.Activity
@@ -48,7 +48,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
 import bob.colbaskin.designsystem.ui.theme.CustomTheme
 import bob.colbaskin.designsystem.ui.theme.UFOODTheme
-import bob.colbaskin.ufood.utils.calculateImageScaleToFullscreen
+import bob.colbaskin.main.presentation.utils.calculateImageScaleToFullscreen
 import bob.colbaskin.designsystem.utils.CustomDarkPreview
 import bob.colbaskin.designsystem.utils.CustomLightPreview
 import kotlinx.coroutines.delay

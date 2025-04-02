@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.PagerState
 import androidx.compose.runtime.Composable
@@ -55,7 +56,7 @@ private fun PagerIndicator(
         verticalAlignment = Alignment.CenterVertically
     ) {
         repeat(pageCount) { pageIndex ->
-            val isSelected = currentPage == pageIndex
+            val isSelected = pageIndex == currentPage
             val shape = if (isSelected) {
                 CustomTheme.shapes.pageIndicator
             } else {
@@ -77,8 +78,8 @@ private fun PagerIndicator(
 
             Box(
                 modifier = Modifier
-                    .height(width)
-                    .size(CustomTheme.dimensions.dimensions16)
+                    .width(width)
+                    .size(CustomTheme.dimensions.dimensions8)
                     .clip(shape)
                     .background(color)
             )

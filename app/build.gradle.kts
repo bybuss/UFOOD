@@ -40,6 +40,7 @@ android {
 }
 
 dependencies {
+    implementation(projects.feature.main.presentation)
 
     implementation(projects.designsystem)
     implementation(libs.androidx.core.ktx)
