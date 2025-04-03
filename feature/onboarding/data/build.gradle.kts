@@ -33,6 +33,8 @@ android {
 }
 
 dependencies {
+    implementation(projects.feature.onboarding.domain)
+    implementation(projects.storage.datastore)
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)

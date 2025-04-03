@@ -25,15 +25,24 @@ import bob.colbaskin.designsystem.ui.theme.UFOODTheme
 import bob.colbaskin.designsystem.utils.SpanType
 import bob.colbaskin.designsystem.utils.createAnnotatedString
 import bob.colbaskin.onboarding.presentation.R
+import bob.colbaskin.onboarding.presentation.mvi.Event
+import bob.colbaskin.onboarding.presentation.mvi.OnboardingViewModel
 import kotlinx.coroutines.launch
+import org.koin.androidx.compose.koinViewModel
 
 @Composable
-fun IntroductionScreen(onNextScreen: () -> Unit) {
-    OnBoarding(onNextScreen)
+fun IntroductionScreen(
+    onNextScreen: () -> Unit,
+    viewModel: OnboardingViewModel = koinViewModel()
+) {
+    OnBoarding(onNextScreen, viewModel::event)
 }
 
 @Composable
-private fun OnBoarding(onNextScreen: () -> Unit) {
+private fun OnBoarding(
+    onNextScreen: () -> Unit,
+    dispatch: (Event) -> Unit
+) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -60,7 +69,9 @@ private fun OnBoarding(onNextScreen: () -> Unit) {
             pagerState = pagerState
         ) {
             Column(
-                modifier = Modifier.fillMaxSize().padding(bottom = CustomTheme.dimensions.dimensions16),
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(bottom = CustomTheme.dimensions.dimensions16),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Lottie(
@@ -98,6 +109,7 @@ private fun OnBoarding(onNextScreen: () -> Unit) {
                     if (pagerState.currentPage < pageCount - 1) {
                         pagerState.animateScrollToPage(pagerState.currentPage + 1)
                     } else {
+                        dispatch(Event.OnboardingCompleted)
                         onNextScreen()
                     }
                 }
@@ -107,15 +119,10 @@ private fun OnBoarding(onNextScreen: () -> Unit) {
         CustomTextButton(
             text = stringResource(R.string.skip),
             isFullWidth = false,
-            onClick = { onNextScreen() },
+            onClick = {
+                dispatch(Event.OnboardingCompleted)
+                onNextScreen()
+            },
         )
-    }
-}
-
-@Preview
-@Composable
-fun OnBoardingPreview() {
-    UFOODTheme {
-        IntroductionScreen {}
     }
 }

@@ -14,14 +14,23 @@ import bob.colbaskin.designsystem.CustomText
 import bob.colbaskin.designsystem.NextButton
 import bob.colbaskin.designsystem.ui.theme.CustomTheme
 import bob.colbaskin.onboarding.presentation.R
+import bob.colbaskin.onboarding.presentation.mvi.Event
+import bob.colbaskin.onboarding.presentation.mvi.OnboardingViewModel
+import org.koin.androidx.compose.koinViewModel
 
 @Composable
-fun WelcomeScreen(onNextScreen: () -> Unit) {
-    Welcome(onNextScreen)
+fun WelcomeScreen(
+    onNextScreen: () -> Unit,
+    viewModel: OnboardingViewModel = koinViewModel()
+) {
+    Welcome(onNextScreen, viewModel::event)
 }
 
 @Composable
-private fun Welcome(onNextScreen: () -> Unit) {
+private fun Welcome(
+    onNextScreen: () -> Unit,
+    dispatch: (Event) -> Unit
+) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -61,7 +70,7 @@ private fun Welcome(onNextScreen: () -> Unit) {
                 isFullWidth = false,
                 isMainButton = false,
                 onClick = {
-                    //dispatch(Event.OnboardingInProgress)
+                    dispatch(Event.OnboardingInProgress)
                     onNextScreen()
                 },
             )

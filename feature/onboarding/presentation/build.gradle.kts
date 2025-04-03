@@ -37,15 +37,15 @@ android {
 }
 
 dependencies {
-
     implementation(projects.designsystem)
-//    implementation(platform(libs.androidx.compose.bom))
-//    implementation(libs.androidx.core.ktx)
+    implementation(projects.feature.onboarding.domain)
+
+    implementation(platform(libs.androidx.compose.bom))
+    implementation(libs.androidx.core.ktx)
     implementation(platform(libs.koin.bom))
     implementation(libs.koin.android)
-    implementation(libs.koin.android)
+    implementation(libs.koin.compose)
 
-    implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
     testImplementation(libs.junit)

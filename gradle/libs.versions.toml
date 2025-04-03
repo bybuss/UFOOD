@@ -1,5 +1,5 @@
 [versions]
-agp = "8.8.2"
+agp = "8.9.1"
 kotlin = "2.1.0"
 kotlinxSerializationJson = "1.8.0"
 koin-bom = "4.0.1"
@@ -64,7 +64,7 @@ androidx-datastore = { group = "androidx.datastore", name = "datastore", version
 androidx-datastore-core = { module = "androidx.datastore:datastore-preferences-core", version.ref = "datastore" }
 protobuf-protoc = { group = "com.google.protobuf", name = "protoc", version.ref = "protobuf" }
 protobuf-kotlin-lite = { group = "com.google.protobuf", name = "protobuf-kotlin-lite", version.ref = "protobuf" }
-android-compose-runtime = { group = "androidx.compose.runtime", name = "runtime", version.ref = "composeRuntime" }
+androidx-compose-runtime = { group = "androidx.compose.runtime", name = "runtime", version.ref = "composeRuntime" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
