@@ -4,8 +4,8 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.style.TextAlign
 import bob.colbaskin.designsystem.ui.theme.CustomTheme
 
@@ -22,6 +22,21 @@ fun CustomText(
         textAlign = textAlign,
         style = textStyle,
         color = color,
+        modifier = modifier,
+    )
+}
+
+@Composable
+fun CustomText(
+    text: AnnotatedString,
+    textAlign: TextAlign = TextAlign.Start,
+    textStyle: TextStyle = CustomTheme.typography.inter.titleMedium,
+    modifier: Modifier = Modifier,
+) {
+    Text(
+        text = text,
+        textAlign = textAlign,
+        style = textStyle,
         modifier = modifier,
     )
 }

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="welcome_text">Добро пожаловать в</string>
+    <string name="welcome_app_name">UFOOD</string>
+    <string name="welcome_description">Виктор Баринов \nследит за Вами.</string>
+    <string name="welcome_get_started">Начать!</string>
+
+    <string name="next">Дальше</string>
+    <string name="skip">Пропустить</string>
+    <string-array name="onboarding_title">
+        <item>1 тайтл</item>
+        <item>2 тайтл</item>
+        <item>3 тайтл</item>
+    </string-array>
+    <string-array name="onboarding_description">
+        <item>Первый экранчик</item>
+        <item>Второй экранчик-зайчик</item>
+        <item>Третий экранчик-танчик</item>
+    </string-array>
+
+    <string-array name="onboarding_animation">
+        <item>https://cdn.lottielab.com/l/C5tjXQCQJaB3ta.json</item>
+        <item>https://cdn.lottielab.com/l/9oCpPkK7qw6zhZ.json</item>
+        <item>https://cdn.lottielab.com/l/EUqFw672Yjc2ZT.json</item>
+    </string-array>
+</resources>

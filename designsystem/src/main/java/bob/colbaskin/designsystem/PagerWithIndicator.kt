@@ -56,7 +56,7 @@ private fun PagerIndicator(
         verticalAlignment = Alignment.CenterVertically
     ) {
         repeat(pageCount) { pageIndex ->
-            val isSelected = currentPage == pageIndex
+            val isSelected = pageIndex == currentPage
             val shape = if (isSelected) {
                 CustomTheme.shapes.pageIndicator
             } else {
@@ -79,7 +79,7 @@ private fun PagerIndicator(
             Box(
                 modifier = Modifier
                     .width(width)
-                    .size(CustomTheme.dimensions.dimensions16)
+                    .size(CustomTheme.dimensions.dimensions8)
                     .clip(shape)
                     .background(color)
             )

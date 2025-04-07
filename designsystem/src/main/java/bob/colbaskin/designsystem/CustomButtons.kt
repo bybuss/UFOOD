@@ -29,7 +29,7 @@ import bob.colbaskin.designsystem.utils.getTextType
 @Composable
 fun NextButton(
     text: String,
-    icon: Int,
+    icon: Int? = R.drawable.arrows,
     isFullWidth: Boolean = true,
     isMainButton: Boolean = true,
     onClick: () -> Unit,
@@ -50,15 +50,17 @@ fun NextButton(
                 textStyle = ButtonType.NEXT.getTextType(),
                 color = Color.White
             )
-            Image(
-                painter = painterResource(icon),
-                contentDescription = "$text button",
-                modifier = modifier
-                    .align(Alignment.CenterEnd)
-                    .getIconSize(ButtonType.NEXT)
-                    .alpha(0.15f),
+            icon?.let {
+                Image(
+                    painter = painterResource(it),
+                    contentDescription = "$text button",
+                    modifier = modifier
+                        .align(Alignment.CenterEnd)
+                        .getIconSize(ButtonType.NEXT)
+                        .alpha(0.15f),
 
-            )
+                    )
+            }
         }
     }
 }
@@ -66,7 +68,7 @@ fun NextButton(
 @Composable
 fun BuyButton(
     text: String,
-    icon: Int,
+    icon: Int? = R.drawable.bag,
     isFullWidth: Boolean = true,
     isMainButton: Boolean = true,
     onClick: () -> Unit,
@@ -83,29 +85,54 @@ fun BuyButton(
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceEvenly
         ) {
-            Image(
-                painter = painterResource(icon),
-                contentDescription = "$text button",
-                modifier = modifier.getIconSize(ButtonType.BUY_INGREDIENTS)
-            )
+            icon?.let {
+                Image(
+                    painter = painterResource(it),
+                    contentDescription = "$text button",
+                    modifier = modifier.getIconSize(ButtonType.BUY_INGREDIENTS)
+                )
+            }
             CustomText(
                 text = text,
                 textStyle = ButtonType.BUY_INGREDIENTS.getTextType(),
                 textAlign = TextAlign.Center,
                 color = Color.Black
             )
-            Image(
-                painter = painterResource(icon),
-                contentDescription = "$text button",
-                modifier = modifier.getIconSize(ButtonType.BUY_INGREDIENTS)
-            )
+            icon?.let {
+                Image(
+                    painter = painterResource(it),
+                    contentDescription = "$text button",
+                    modifier = modifier.getIconSize(ButtonType.BUY_INGREDIENTS)
+                )
+            }
         }
+    }
+}
+
+@Composable
+fun CustomTextButton(
+    text: String,
+    isFullWidth: Boolean = true,
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier
+) {
+    Button(
+        onClick = onClick,
+        modifier = modifier.getButtonSize(isFullWidth, false),
+        shape = CustomTheme.shapes.button,
+        colors = ButtonType.TEXT.getButtonColors(),
+    ) {
+        CustomText(
+            text = text,
+            textStyle = ButtonType.TEXT.getTextType(),
+            textAlign = TextAlign.Center,
+        )
     }
 }
 
 @Preview(showBackground = true)
 @Composable
-fun BuyButtonPreview() {
+private fun BuyButtonPreview() {
     UFOODTheme {
         Column(modifier = Modifier.padding(CustomTheme.dimensions.dimensions16)) {
             NextButton(
@@ -125,7 +152,7 @@ fun BuyButtonPreview() {
 
 @Preview(uiMode = UI_MODE_NIGHT_YES)
 @Composable
-fun BuyButtonPreviewDarkTheme() {
+private fun BuyButtonPreviewDarkTheme() {
     UFOODTheme {
         Column(modifier = Modifier.padding(CustomTheme.dimensions.dimensions16)) {
             NextButton(
