@@ -45,4 +45,9 @@ dependencies {
     api(libs.androidx.material3)
     debugImplementation(libs.ui.tooling)
     implementation(libs.lottie.compose)
+
+    implementation(libs.material)
+    testImplementation(libs.junit)
+    androidTestImplementation(libs.androidx.junit)
+    androidTestImplementation(libs.androidx.espresso.core)
 }

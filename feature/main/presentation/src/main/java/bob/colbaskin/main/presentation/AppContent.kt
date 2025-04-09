@@ -7,6 +7,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
 import bob.colbaskin.common.model.AuthConfig
@@ -14,7 +15,6 @@ import bob.colbaskin.common.model.ThemeConfig
 import bob.colbaskin.designsystem.ScreenContainer
 import bob.colbaskin.designsystem.ui.theme.UFOODTheme
 import bob.colbaskin.designsystem.utils.UiText
-import bob.colbaskin.designsystem.utils.asString
 import bob.colbaskin.main.presentation.mvi.UiState
 import bob.colbaskin.main.presentation.navigation.Graphs
 import bob.colbaskin.main.presentation.navigation.navigateToOnboarding
@@ -33,7 +33,7 @@ fun AppContent(uiState: UiState.Success) {
                 showErrorMessage = false
             }
         }
-        ScreenContainer(showErrorMessage, errorMessage.asString()) {
+        ScreenContainer(showErrorMessage, errorMessage.getString(LocalContext.current)) {
             NavHost(
                 navController = navController,
                 startDestination = getDestination(uiState.data.authType)
